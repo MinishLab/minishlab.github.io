@@ -5,6 +5,22 @@
     font-size: 95%;
 }
 
+.wrapper-masthead {
+    margin-bottom: 25px;
+    background-color: #00d936;
+    border-bottom: 5px solid #2c2a2b;
+    background: linear-gradient(to right, #00d936, #00dc3e);
+  }
+
+.masthead {
+font-family: "VT323";
+border-bottom: 0px solid #2c2a2b;
+}
+
+a {
+    text-decoration: underline;
+}
+
 code {
     font-family:'Bitstream Vera Sans Mono','Courier', monospace;
     color: #d8d8d8;
@@ -15,6 +31,15 @@ code {
     color: #FF554A; 
     font-size: 16px;
 }
+
+table, th, td {
+    border: none !important;
+}
+
+table {
+    border-collapse: separate !important;
+}
+
 
 .highlight .hll { background-color: #f1fa8c }
 .highlight  { background: #282a36; color: #f8f8f2 }
