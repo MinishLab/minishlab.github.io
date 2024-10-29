@@ -1,13 +1,11 @@
 ---
 layout: post
-title: Tokenlearn blogpost
+title: "POTION: bag of tricks leads to better models"
 categories: [Model2Vec]
 ---
 
 This blogpost describes the [Tokenlearn](https://github.com/MinishLab/tokenlearn) method, which is a method to pre-train Model2Vec models.
 
-
-# Bag of tricks leads to better models: POTION
 
 We've been brewing, concocting, distilling, and came up with a new distillation technique that leads to much better models, which we are now releasing under the name POTION. We open source all models, code, and data. 
 
