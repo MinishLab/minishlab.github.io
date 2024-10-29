@@ -2,10 +2,18 @@
   
     {
 
+      "title"    : "Tokenlearn blogpost",
+      "url"      : "/tokenlearn_blogpost/",
+      "category" : "Model2Vec",
+      "date"     : "October 29, 2024"
+    } ,
+  
+    {
+
       "title"    : "Model2Vec Introduction blogpost",
       "url"      : "/hf_blogpost/",
       "category" : "Model2Vec",
-      "date"     : "October 10, 2024"
+      "date"     : "October 14, 2024"
     } 
   
 ]
