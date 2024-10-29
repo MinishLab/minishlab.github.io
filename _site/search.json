@@ -2,7 +2,7 @@
   
     {
 
-      "title"    : "Tokenlearn blogpost",
+      "title"    : "Tokenlearn: bag of tricks leads to better models",
       "url"      : "/tokenlearn_blogpost/",
       "category" : "Model2Vec",
       "date"     : "October 29, 2024"
