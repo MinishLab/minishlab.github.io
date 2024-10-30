@@ -47,7 +47,7 @@ During training, we apply a few standard methods to improve performance, such as
 
 ### 4. Post-training re-regularization
 
-Finally, after training, we _re-regularize_ our models by performing PCA, and by manually re-weighting individual tokens. As we show below, this massively improves performance, again. 
+Finally, after training, we _re-regularize_ our models by performing PCA, and by manually re-weighting individual tokens.
 
 Of note here is the manual re-weighting, which is very similar to the Zipf weighting we use, but now relies on external data. Before, we assumed that all tokens were in rank order, and simply weighted them as follows:
 
