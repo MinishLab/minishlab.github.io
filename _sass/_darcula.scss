@@ -5,20 +5,41 @@
     font-size: 95%;
 }
 
+.site-name {
+    a {
+        font-family: "Jua";
+    }
+    font-size: 60px;
+    color: $header_color
+}
+
+.site-description {
+    font-family: "Seaweed Script";
+    font-size: 20px;
+    color: $header_color;
+}
+
 .wrapper-masthead {
     margin-bottom: 25px;
-    background-color: #00d936;
-    border-bottom: 5px solid #2c2a2b;
-    background: linear-gradient(to right, #00d936, #00dc3e);
+    background-color: $header_bg;
+    border-bottom: 10px solid $line_color;
+    color: $header_color;
+    //background-image: $header_bg_gradient;
   }
 
 .masthead {
-font-family: "VT323";
-border-bottom: 0px solid #2c2a2b;
+    color: $header_color;
+    
 }
 
 a {
-    text-decoration: underline;
+    font-family: "Jua";
+    color: $headerslinks;
+    font-size: larger;
+    text-decoration: none;
+    text-decoration-style: solid;
+    text-decoration-thickness: 0.2rem;
+    text-decoration-color: $headerslinks;
 }
 
 code {
@@ -27,8 +48,8 @@ code {
 }
 
 .highlighter-rouge { 
-    background-color: #FAFAFA; 
-    color: #FF554A; 
+    background-color: $background; 
+    color: #4a86ff; 
     font-size: 16px;
 }
 
@@ -39,7 +60,6 @@ table, th, td {
 table {
     border-collapse: separate !important;
 }
-
 
 .highlight .hll { background-color: #f1fa8c }
 .highlight  { background: #282a36; color: #f8f8f2 }
