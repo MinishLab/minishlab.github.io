@@ -4,7 +4,22 @@
 //
 
 // Colors
-$blue: #11992a;
+$headerslinks: #22975e;
+$background: #e7e4da;
+$styling: #22975e;
+$hover: #03661f;
+$header_bg: #22975e;
+$header_bg_gradient: linear-gradient(90deg, #5768ff, 10%, #f8f4cc);
+$header_color: #e7e4da;
+$line_color: #22975e;
+
+// Color
+
+//$headerslinks: #099b32;
+//$background: #f8f4cc;
+//$styling: #099b32;
+//$hover: #27f503;
+//$header_bg: #f8f4cc;
 
 // Grays
 $black: #000;
@@ -18,6 +33,8 @@ $white: #fff;
 $helvetica: Helvetica, Arial, sans-serif;
 $helveticaNeue: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $georgia: Georgia, serif;
+$header_font: "Jersey 15";
+$title_font: "Birthstone";
 
 // Mobile breakpoints
 @mixin mobile {

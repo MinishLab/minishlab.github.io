@@ -5,20 +5,45 @@
     font-size: 95%;
 }
 
+.site-name {
+    a {
+        font-family: "Seaweed Script";
+    }
+    font-size: 85px;
+    color: $header_color;
+    text-shadow: $hover 3px 3px 0px;
+}
+
+.site-description {
+    font-family: "Seaweed Script";
+    font-size: 20px;
+    color: $header_color;
+    text-shadow: $hover 2px 2px 0px;
+}
+
 .wrapper-masthead {
     margin-bottom: 25px;
-    background-color: #00d936;
-    border-bottom: 5px solid #2c2a2b;
-    background: linear-gradient(to right, #00d936, #00dc3e);
+    background-color: $header_bg;
+    border-bottom: 10px solid $line_color;
+    color: $header_color;
+    //background-image: $header_bg_gradient;
+    //text-shadow: $hover 2px 2px 1px;
   }
 
 .masthead {
-font-family: "VT323";
-border-bottom: 0px solid #2c2a2b;
+    color: $header_color;
+    
 }
 
 a {
-    text-decoration: underline;
+    font-family: $header_font;
+    color: $headerslinks;
+    font-size: larger;
+    //text-shadow: 1px 1px #e2bd25;
+    text-decoration: none;
+    text-decoration-style: solid;
+    text-decoration-thickness: 0.1rem;
+    text-decoration-color: $headerslinks;
 }
 
 code {
@@ -27,8 +52,8 @@ code {
 }
 
 .highlighter-rouge { 
-    background-color: #FAFAFA; 
-    color: #FF554A; 
+    background-color: $background; 
+    color: #4a86ff; 
     font-size: 16px;
 }
 
@@ -39,7 +64,6 @@ table, th, td {
 table {
     border-collapse: separate !important;
 }
-
 
 .highlight .hll { background-color: #f1fa8c }
 .highlight  { background: #282a36; color: #f8f8f2 }
