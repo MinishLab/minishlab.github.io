@@ -14,7 +14,7 @@ At Minish, we're interested in unlocking new possibilities by making very fast m
 
 While deduplication sounds like something that can only benefit LLM training, it can also be really beneficial to check small datasets for overlap: having even approximate overlap between train and test leads to performance overestimation, and having approximate duplicates in train leads to wasted compute, overestimation of feature importance, and a potential host of other issues. 
 
-Additionally, deduplication techniques can also be used to give you a bird's eye view of larger datasets: checking approximate duplicates using `semhash` takes (milli)seconds, and allows you to see which items from your dataset look alike. If these make sense: great! If these don't make sense... also great! Everything is better than training on incorrect data.
+Additionally, deduplication techniques can also be used to give you a bird's eye view of larger datasets: checking approximate duplicates using `semhash` takes (milli)seconds, and allows you to see which items from your dataset look alike. If these make sense: great! If there are no duplicates... also great! Everything is better than training on incorrect data.
 
 # How can I use deduplication?
 
@@ -28,7 +28,7 @@ As mentioned above, it is important that there is no overlap in information betw
 
 Duplicates in RAG systems sounds like something rare, until you consider that most RAG systems are built using chunks: while having completely duplicated documents will probably be rare, having duplicate chunks across documents or within documents is a lot more common. Having duplicate chunks in your knowledge base increases storage costs, increases the risk of retrieving irrelevant chunks, and forces you to implement diversification strategies much sooner than necessary.
 
-## Corpus overview
+## Explain your corpus
 
 By running `semhash` with a low threshold, you can quickly get an overview of which documents are similar to others, and which aren't. This gives you a good idea of what to focus on, what kind of things are missing from your data, and how your documents relate to one another.
 
@@ -39,14 +39,14 @@ At its core, `semhash` takes as input a collection of strings or dictionaries. Y
 ```python
 from datasets import load_dataset
 
-from semhash import Semhash
+from semhash import SemHash
 
 dataset = load_dataset("ag_news")
 train = dataset["train"]
-test = dataset["text"]
+test = dataset["test"]
 
 # This creates an index over your train set. All records are stored in their entirety.
-semhash = Semhash.from_records(records=train, columns=["text"])
+semhash = SemHash.from_records(records=train, columns=["text"])
 # This deduplicates your texts with reference to `train`. Any items occurring in train are
 # removed from test.
 result = semhash.deduplicate(test, threshold=0.9)
@@ -62,21 +62,21 @@ During fitting, all document are first encoded by an encoder. The default encode
 
 Because all of these components are very fast, deduplicating even really large datasets only takes minutes. For example, deduplicating the entire [Squad-2.0 dataset](https://huggingface.co/datasets/rajpurkar/squad_v2) dataset, which has 130000 samples, only takes 7 seconds. This includes vectorization, fitting the index, and the actual deduplication. Smaller datasets only take a fraction of this time, while even datasets containing millions of documents only take minutes. For a comprehensive benchmark, see [our benchmarks](https://github.com/MinishLab/semhash?tab=readme-ov-file#benchmarks).
 
-## Diving into data
+## Explainability
 
 `semhash` can also be used to investigate your dataset. By using `self_deduplicate`, you can deduplicate the training set itself, which we will use as a jumping off point:
 
 ```python
 from datasets import load_dataset
 
-from semhash import Semhash
+from semhash import SemHash
 
 dataset = load_dataset("ag_news")
 train = dataset["train"]
-test = dataset["text"]
+test = dataset["test"]
 
 # This creates an index over your train set. All records are stored in their entirety.
-semhash = Semhash.from_records(records=train, columns=["text"])
+semhash = SemHash.from_records(records=train, columns=["text"])
 result = semhash.self_deduplicate(threshold=0.9)
 ```
 
@@ -128,6 +128,29 @@ print(result.duplicate_ratio)
 ```
 
 So, a general strategy could be to start with a relatively low threshold, unilt the results returned by `result.get_least_similar_from_duplicates` start making sense. In our experiments, however, a threshold if 0.9, which is the default, works fine, but be sure to check for your individual use-cases.
+
+# Multi-column data
+
+`semhash` also supports multi-column datasets, allowing you to deduplicate datasets that have text in multiple columns. For example, in QA datasets, you don't just want to deduplicate similar questions or similar contexts, but you want to only count items in which both fields are sufficiently similar as duplicated.
+
+This is a difficult problem to tackle, but `semhash` can also handle this.
+
+The following snippet demonstrates how this works:
+
+```python
+from datasets import load_dataset
+
+from semhash import SemHash
+
+dataset = load_dataset("rajpurkar/squad_v2")
+train = dataset["train"]
+
+# This creates an index over your train set. All records are stored in their entirety.
+semhash = SemHash.from_records(records=train, columns=["context", "question"])
+result = semhash.self_deduplicate(threshold=0.9)
+```
+
+This computes the similarity and only returns records for which both fields are similar. 
 
 # Conclusion
 
