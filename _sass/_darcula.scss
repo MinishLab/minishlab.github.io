@@ -7,7 +7,7 @@
 
 .site-name {
     a {
-        font-family: "Jua";
+        font-family: $header_font;
     }
     font-size: 60px;
     color: $header_color
@@ -33,12 +33,13 @@
 }
 
 a {
-    font-family: "Jua";
+    font-family: $header_font;
     color: $headerslinks;
     font-size: larger;
+    //text-shadow: 1px 1px #e2bd25;
     text-decoration: none;
     text-decoration-style: solid;
-    text-decoration-thickness: 0.2rem;
+    text-decoration-thickness: 0.1rem;
     text-decoration-color: $headerslinks;
 }
 

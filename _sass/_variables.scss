@@ -4,14 +4,16 @@
 //
 
 // Colors
-$headerslinks: #5768ff;
-$background: #f8f4cc;
-$styling: #5768ff;
-$hover: #5784ff;
-$header_bg: #5768ff;
+$headerslinks: #5b9b7c;
+$background: #e7e4da;
+$styling: #5b9b7c;
+$hover: #04c156;
+$header_bg: #5b9b7c;
 $header_bg_gradient: linear-gradient(90deg, #5768ff, 10%, #f8f4cc);
-$header_color: #000;
-$line_color: #000;
+$header_color: #e7e4da;
+$line_color: #5b9b7c;
+
+// Color
 
 //$headerslinks: #099b32;
 //$background: #f8f4cc;
@@ -31,6 +33,7 @@ $white: #fff;
 $helvetica: Helvetica, Arial, sans-serif;
 $helveticaNeue: "Helvetica Neue", Helvetica, Arial, sans-serif;
 $georgia: Georgia, serif;
+$header_font: "Sedan";
 
 // Mobile breakpoints
 @mixin mobile {
