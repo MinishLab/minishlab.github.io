@@ -28,8 +28,7 @@ As `ModernBERT`-based models have about 50k tokens in their tokenizer, this is a
 
 So, we created a Model2Vec distill of both ModernBERT embedders above, both of which are `ModernBERT` finetunes. We fully expected this to work well, because in previous experiments, we saw that BERT-based encoder models worked best for model2vec distillation.
 
-Here's the scores on a subset of [MTEB](https://huggingface.co/spaces/mteb/leaderboard) tasks, compared with a straight [BAAI/bge-base-en-v1.5](https://huggingface.co/BAAI/bge-base-en-v1.5) distill. Note that `gte-modern-bert-base` outperforms `bge-base-en-v1.5` on the MTEB leaderboard, so we expected a distilled model to also perform better.
-
+Here's the scores on a subset of [MTEB](https://huggingface.co/spaces/mteb/leaderboard) tasks, compared with a straight [BAAI/bge-base-en-v1.5](https://huggingface.co/BAAI/bge-base-en-v1.5) distill. Note that both `gte-modern-bert-base` and `nomic-ai/modernbert-embed-base` outperform `bge-base-en-v1.5` on the MTEB leaderboard, so we expected a distilled model to also perform better.
 
 |                  | STS  |  WordSim  | Classification |
 |------------------|-----:|----------:|---------------:|
@@ -37,7 +36,7 @@ Here's the scores on a subset of [MTEB](https://huggingface.co/spaces/mteb/leade
 | gte-modernbert-base | 66.5 (-2.8) | 25.6 (-24.1) | 60.4 (-2.0) |
 | modernbert-embed-base  | 65.1 (-4.2)| 26.1 (-23.6) | 59.4 (-3.0) |
 
-But that's not the case at all! `bge-base-en-v1.5` outperforms both `ModernBERT`-based distills on all tasks. Luckily for us, the `WordSim` task provides us with a good reason for why this is the case. 
+As you can see, that's not the case at all. `bge-base-en-v1.5` outperforms both `ModernBERT`-based distills on all tasks, and with a huuuuuge margin on `WordSim`. Luckily for us, the `WordSim` task provides us with a good reason for why this is the case. 
 
 ## WordSim
 
@@ -49,7 +48,9 @@ This task is interesting to us because it provides us with an estimate of how go
 
 What is interesting about the performance of `ModernBERT` on `WordSim` is that it is atrociously low, lower than any model we've seen before, and that it does not seem to correlate at all with performance on other tasks, on which it scores lower, but not atrociously low. 
 
-But why could this be the case, and why would it hold for both models? The answer is likely to be the tokenizer used in `ModernBERT`! `ModernBERT`'s tokenizer, unlike the traditional `BERT` tokenizer, which is used in a lot of embedders, is a byte-pair encoding (BPE) tokenizer. To see what this means, let's take a look at five random BPE tokens from `ModernBERT`'s tokenizer:
+But why could this be the case, and why would it hold for both models? Because it seems to hurt both models equally, it looks like something in the base model is to blame. 
+
+In our view, the answer is likely to be the tokenizer used in `ModernBERT`. `ModernBERT`'s tokenizer, unlike the traditional `BERT` tokenizer, which is used in a lot of embedders, is a byte-pair encoding (BPE) tokenizer. To see what this means, let's take a look at five random BPE tokens from `ModernBERT`'s tokenizer:
 
 ```
 Ġnickel
