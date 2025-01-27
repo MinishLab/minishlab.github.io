@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "modernbert support and why it doesn't work"
+title: "ModernBERT support and why it doesn't work"
 categories: [model2vec]
 ---
 
