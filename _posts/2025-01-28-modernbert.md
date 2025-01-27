@@ -15,7 +15,7 @@ And probably many more.
 
 We didn't support ModernBert out of the box because of ~~a bug~~ design decision, which we fixed in this release. Frustratingly, however, distilling a very good ModernBERT model does not lead to a good model2vec model. This blog post details why we think that is the case: we give a bunch of numbers, some explanation, and also provide the distilled model for you to play with. 
 
-# What is ModernBERT for Model2Vec?
+# Distilling ModelBERT
 
 As you probably know, a Model2Vec model is created by:
 
