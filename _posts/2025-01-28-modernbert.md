@@ -97,4 +97,4 @@ Support for mutating BPE tokenizers in model2vec is lacking: we don't allow voca
 
 If token removal was allowed, we could test whether the casing affects performance. If adding tokens to the tokenizer was allowed, we could see whether adding the words in `WordSim` would improve performance.
 
-So one thing on our roadmap, but a very low priority one, is to add this support to model2vec. If you have an idea on how to do it, please let us know!
+So one thing on our roadmap, but a very low priority one, is to add support for token addition and/or removal to model2vec. If you have an idea on how to do it, please let us know!
