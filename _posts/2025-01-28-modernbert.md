@@ -4,6 +4,8 @@ title: "modernbert support and why it doesn't work"
 categories: [model2vec]
 ---
 
+# ModernBERT support and why it doesn't work
+
 Our newest shiny release is here! 0.3.8! This is a small release in line for a big one we'll be releasing next week. See here for the release notes.
 
 The biggest feature in this release is support for [Modernbert](https://huggingface.co/blog/modernbert)! As the name implies, ModernBERT is a refresh of the venerable BERT model, trained on more data, with lots of nice tricks; harder, better, faster, stronger. Since its release at the end of last year, many embedders based on `ModernBERT` have appeared, including:
