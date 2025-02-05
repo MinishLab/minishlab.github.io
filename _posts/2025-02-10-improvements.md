@@ -10,9 +10,9 @@ This post details how the distillation process has changed over time, and how th
 
 # Improvements
 
-Here are the improvements, in order of their appearance. In the last section, we'll contrast all of them, and show their impact on performance by running on MTEB.
+Here are the improvements, in order of their appearance. In the last section, we'll contrast all of them, and show their impact MTEB performance.
 
-For all experiments, we distill [`baai/bge-base-en-v1.5`](BAAI/bge-base-en-v1.5) using the default parameters. For completeness, we list all parameters.
+For all experiments, we distill [`baai/bge-base-en-v1.5`](BAAI/bge-base-en-v1.5) using the default parameters.
 
 ## Basic
 
@@ -29,11 +29,11 @@ We tried many variations on this theme, including:
 
 None of these really had the desired effect, but feel free to let us know if you come up with something else!
 
-The basic performance of our model with these strategies is on MTEB is **45.34**.
+The basic performance of our model with these strategies is on MTEB is **45.34**. We released this model as [m2v_base_output](https://huggingface.co/minishlab/M2V_base_output).
 
 ## 1. Pooling
 
-We switched from selecting the token to mean pooling, that is, the representation of a token is the mean of the `EOS token BOS` we pass forward through the network. 
+As a first change: we switched from selecting the token to mean pooling, that is, the representation of a token is the mean of the `EOS token BOS` we pass forward through the network. 
 
 In code:
 
@@ -46,11 +46,11 @@ embedding = model(["EOS token BOS"]).mean(1)
 
 We also tried a variety of other pooling strategies, including selecting specific tokens, adding queries, and adding prompts.
 
-This raises the average score from **45.34** to **45.91**, but has a larger effect on models that don't perform well to begin with.
+This raises the average score from **45.34** to **45.91**, but has a larger effect on models that don't perform well to begin with, such as modernBERT-based models.
 
 ## 2. SIF weighting
 
-We replaced the Zipf weighting with a strategy based on the well-known [SIF algorithm](https://openreview.net/pdf?id=SyK00v5xx). In short, this algorithm takes a probability distribution over all tokens in the vocabulary, and downweights very frequent tokens, while upweighting very infrequent tokens. It uses the following formula:
+Following this, we replaced the Zipf weighting with a strategy based on the well-known [SIF algorithm](https://openreview.net/pdf?id=SyK00v5xx). In short, this algorithm creates a probability distribution over all tokens in the vocabulary, and downweights very frequent tokens, while upweighting very infrequent tokens. For weighting, it uses the following formula:
 
 ```python
 sif = alpha / (alpha * proba)
@@ -60,7 +60,7 @@ Where `proba` is a vector of token probabilities. As before, we use Zipf's law t
 
 ## 3. Normalization
 
-Normalization has been a part of model2vec from the very first version. This is a boolean flag that, when set to `True`, unit normalizes all output vectors. This is set to `False` by default, but this turns out to be a bad choice. Setting it to `True` has an enormous positive effect, especially on retrieval and clustering, and raises the average score from **47.40** to a whopping **47.79**.
+Normalization has been a part of model2vec from the very first version. This is a boolean flag that, when set to `True`, unit normalizes all output vectors. This is set to `False` by default, but this turns out to be a bad choice. Setting it to `True` has a significant positive effect, especially on retrieval and clustering, and raises the average score from **47.40** to a whopping **47.79**.
 
 # Taking stock
 
