@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Slow Climb: Gradual improvements to Model2Vec"
+title: "New improvements to model2vec distillation"
 categories: [model2vec]
 ---
 
@@ -64,7 +64,7 @@ Normalization has been a part of model2vec from the very first version. This is 
 
 # Taking stock
 
-Here's the table for those of you interested in more details. As you can see, the improvements we found are general, in the sense that they improve performance for all tasks. Anecdotally, this also seems to hold for other models we tried.
+If you want more details, you can find the full table below. As you can see, the improvements we found are general, in the sense that they improve performance for all tasks except PEARL. Anecdotally, this also seems to hold for other models we tried.
 
 |                    |   m2v_base_output |   +mean pooling |   +sif |   +norm |
 |:-------------------|------------------:|----------:|----------------------:|-------------------:|
@@ -82,9 +82,7 @@ Here's the table for those of you interested in more details. As you can see, th
 
 As you can see, adding the improvements increases the scores for distillations across all tasks, with PEARL being the notable exception.
 
-# Where do we go next?
-
-We are always actively improving model2vec distillation performance, so keep on checking back from time to time, we might have some nice stuff in store.
+# Where to go from here?
 
 One active area of improvement is to make it a lot easier to tune your model on a specific dataset, so that the model gains knowledge about the specific problem or language you're trying to tackle. This will come up in a next release.
 
