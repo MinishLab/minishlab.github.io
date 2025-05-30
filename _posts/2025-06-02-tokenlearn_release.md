@@ -14,14 +14,15 @@ As an example: our new tokenlearn version was used to train our multilingual fla
 
 # How does it work?
 
-Before starting on what's new, let's first go into how you can use tokenlearn. First, you need to select a base model, i.e., a sentence transformer you like using, and a dataset from which you will sample passages. For this, you need to use the `featurize` script.
+Before starting on what's new, let's first go into how you can use tokenlearn. First, you need to select a base model, i.e., a sentence transformer you like using, and a dataset from which you will sample passages. For this, you need to use the `featurize` function.
 
 ```python
+from datasets import load_dataset
 from sentence_transformers import SentenceTransformer
 
 from tokenlearn.featurize import featurize
 
-my_corpus = [{"text": "sentence_1"}, {"text": "sentence_2"}]
+my_corpus = load_dataset("allenai/c4", "en", split="train", streaming=True)
 model = SentenceTransformer("baai/bge-base-en-v1.5")
 output_dir = "my_corpus_featurized"
 
@@ -29,14 +30,14 @@ featurize(
     dataset=my_corpus,
     model=model,
     output_dir=output_dir,
-    max_means=2_000_000,  # Useful if you have an infinite number of documents
+    max_means=2_000_000,  
     batch_size=32,
     text_key="text"
 )
 
 ```
 
-Leave this running for a while, and you will get a set of documents and means in `output_dir`. Now that you have the documents in this directory, you can fit a model on them.
+Leave this running for a while, and you will get a set of documents and means in `output_dir`. Note that this script can be resumed, if the arguments are the same, the embedding computation will pick up where you left it. Now that you have the documents in this directory, you can fit a model on them.
 
 ```python
 from tokenlearn.train import train_model
