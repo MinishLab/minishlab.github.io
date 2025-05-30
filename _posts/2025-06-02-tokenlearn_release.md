@@ -6,13 +6,13 @@ categories: [Tokenlearn]
 
 We've released a new version of tokenlearn! It contains usability improvements, fixes some bugs, and has a new learning algorithm under the hood that improves performance. Read on to see what it does and how you can use it.
 
-# Why use tokenlearn?
+## Why use tokenlearn?
 
 Tokenlearn is a way to improve you distilled Model2Vec models by performing an additional knowledge distillation step using the base model (the sentence transformer you distilled) and your distilled Model2Vec model. The Model2Vec model is trained to directly mimic the vectors produced by the base model, which leads to massive improvements. Notably, this does not require any labeled data.
 
 As an example: our new tokenlearn version was used to train our multilingual flagship model, [potion-multilingual-128M](https://huggingface.co/minishlab/potion-multilingual-128M). This model performs at about the same level as [static-similarity-mrl-multilingual-v1](https://huggingface.co/sentence-transformers/static-similarity-mrl-multilingual-v1) (which we will call MRL). The main difference between the two is how they were trained: MRL has been trained on 8.5 million cross-lingually aligned sentence pairs, while potion-multilingual has only been trained on _2 million random C4 passages_. This shows the power of tokenlearn! You can adapt any Model2Vec model to a specific domain with a small number of short documents, no annotations needed.
 
-# How does it work?
+## How does it work?
 
 Before starting on what's new, let's first go into how you can use tokenlearn. First, you need to select a base model, i.e., a sentence transformer you like using, and a dataset from which you will sample passages. For this, you need to use the `featurize` function.
 
@@ -68,7 +68,7 @@ In general, setting `pca_dims` to 256 or 512 should be good enough for most prob
 
 Setting the `vocab_size` parameter is more complicated. If `vocab_size` is > 0, we tokenize all texts before training, and select `vocab_size` words to add to the vocabulary of the distilled model. Whether this is useful really depends on the size of your training corpus, and how well it matches with your downstream task. If there's a lot of lexical overlap between the two, you can see a large improvement in performance, although at significant memory costs, as each added vocabulary item adds a whole row to your embedding matrix. Even setting `vocab_size` to 0 will improve performance over a raw distill, however.
 
-# What does it do?
+## What does it do?
 
 In short, `tokenlearn` training:
 
@@ -81,6 +81,6 @@ The knowledge distillation step is extremely simple: we simply reduce the Mean S
 
 Applying PCA to both the base model and output embeddings turns out to be extremely important. If this is not done, the knowledge distillation step does not work at all.
 
-# Differences between the new and old tokenlearn
+## Differences between the new and old tokenlearn
 
 In the old tokenlearn, we also applied a post-processing step, wherein we applied PCA over the learned weights, and then applied a [SIF-like](https://openreview.net/pdf?id=SyK00v5xx) transform to the embeddings. These steps are now no longer necessary.
