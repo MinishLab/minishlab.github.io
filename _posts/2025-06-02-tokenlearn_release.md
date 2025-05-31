@@ -66,7 +66,7 @@ Running this command will get you a trained potion-like model, specifically fit 
 
 In general, setting `pca_dims` to 256 or 512 should be good enough for most problems, and depends on the explained variance of your target vectors. 
 
-Setting the `vocab_size` parameter is more complicated. If `vocab_size` is > 0, we tokenize all texts before training, and select `vocab_size` words to add to the vocabulary of the distilled model. Whether this is useful really depends on the size of your training corpus, and how well it matches with your downstream task. If there's a lot of lexical overlap between the two, you can see a large improvement in performance, although at significant memory costs, as each added vocabulary item adds a whole row to your embedding matrix. Even setting `vocab_size` to 0 will improve performance over a raw distill, however.
+Setting the `vocab_size` parameter is more complicated. If `vocab_size` is > 0, we tokenize all texts before training, and select `vocab_size` words to add to the vocabulary of the distilled model based on their frequency. Whether this is useful really depends on the size of your training corpus, and how well it matches with your downstream task. If there's a lot of lexical overlap between the two, you can see a large improvement in performance, although at significant memory costs, as each added vocabulary item adds a whole row to your embedding matrix. Even setting `vocab_size` to 0 will improve performance over a raw distill, however.
 
 ## What does it do?
 
