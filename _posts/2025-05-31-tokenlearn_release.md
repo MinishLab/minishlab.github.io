@@ -8,7 +8,7 @@ We've released a new version of tokenlearn! It contains usability improvements, 
 
 ## Why use tokenlearn?
 
-Tokenlearn is a way to improve you distilled Model2Vec models by performing an additional knowledge distillation step using the base model (the sentence transformer you distilled) and your distilled Model2Vec model. The Model2Vec model is trained to directly mimic the vectors produced by the base model, which leads to massive improvements. Notably, this does not require any labeled data.
+Tokenlearn is a way to improve a distilled Model2Vec model by performing an additional knowledge distillation step using the base model (the sentence transformer you distilled) and a distilled Model2Vec model. The Model2Vec model is trained to directly mimic the vectors produced by the base model, which leads to massive improvements. Notably, this does not require any labeled data.
 
 As an example: our new tokenlearn version was used to train our multilingual flagship model, [potion-multilingual-128M](https://huggingface.co/minishlab/potion-multilingual-128M). This model performs at about the same level as [static-similarity-mrl-multilingual-v1](https://huggingface.co/sentence-transformers/static-similarity-mrl-multilingual-v1) (which we will call MRL). The main difference between the two is how they were trained: MRL has been trained on 8.5 million cross-lingually aligned sentence pairs, while potion-multilingual has only been trained on _2 million random C4 passages_. This shows the power of tokenlearn! You can adapt any Model2Vec model to a specific domain with a small number of short documents, no annotations needed.
 
